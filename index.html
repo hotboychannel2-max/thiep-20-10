@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thiệp 20/10 · Cô &amp; Mẹ</title>
+<meta name="description" content="Lá thư chúc mừng ngày Phụ nữ Việt Nam 20/10 gửi cô giáo và mẹ yêu quý.">
+<meta property="og:title" content="💌 Bạn có một lá thư 20/10">
+<meta property="og:description" content="Chạm để mở thư nhé!">
+<meta name="theme-color" content="#f6dde2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Itim&display=swap&subset=vietnamese" rel="stylesheet">
+<style>
+:root{
+  --bg1:#fbe9ec; --bg2:#f3d3da;
+  --env:#f2b9c4; --env-dark:#e79eac; --env-light:#f8cfd7;
+  --paper:#fff6f7; --ink:#4a2f35; --accent:#d9566f; --frame:#f1b3bf;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  background:radial-gradient(120% 90% at 50% 0%,var(--bg1),var(--bg2));
+  font-family:"Itim",system-ui,sans-serif;color:var(--ink);
+  overflow:hidden;user-select:none;-webkit-user-select:none;
+}
+#petals{position:fixed;inset:0;pointer-events:none;z-index:1}
+.petal{position:absolute;top:-30px;font-size:16px;opacity:.75;animation:fall linear forwards}
+@keyframes fall{to{transform:translate(var(--dx),110vh) rotate(var(--rot));opacity:.2}}
+
+#sound{position:fixed;top:max(14px,env(safe-area-inset-top));right:16px;z-index:20;
+  width:40px;height:40px;border-radius:50%;border:none;background:rgba(255,255,255,.55);
+  color:var(--accent);display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(4px)}
+#sound svg{width:22px;height:22px}
+
+.stage{position:fixed;inset:0;display:grid;place-items:center;z-index:5;transition:opacity .6s,transform .6s}
+.hidden{opacity:0;pointer-events:none;transform:scale(.96)}
+
+/* ---------- Envelope ---------- */
+.envelope-wrap{display:flex;flex-direction:column;align-items:center;gap:28px;cursor:pointer}
+.envelope{position:relative;width:min(78vw,300px);aspect-ratio:3/2;perspective:900px;animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px)}}
+.env-back{position:absolute;inset:0;background:var(--env-dark);border-radius:6px}
+.card{position:absolute;left:7%;right:7%;bottom:6%;height:88%;background:var(--paper);border-radius:6px;
+  box-shadow:0 2px 8px rgba(160,60,80,.15);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:transform 1s cubic-bezier(.3,1.2,.5,1) .55s;z-index:2;overflow:visible}
+.card h1{font-family:"Dancing Script",cursive;color:var(--accent);font-size:clamp(20px,6.4vw,28px);line-height:1.05;text-align:center;font-weight:700}
+.card h1 small{display:block;font-size:.78em;margin-top:4px}
+.card .flower{position:absolute;width:30%;bottom:58%;opacity:0;transition:opacity .5s 1.2s}
+.envelope.open .card .flower{opacity:1}
+.card .flower.l{left:-14%;transform:rotate(-14deg)}
+.card .flower.r{right:-14%;transform:scaleX(-1) rotate(-14deg)}
+.env-front{position:absolute;inset:0;z-index:3;pointer-events:none}
+.env-front svg{width:100%;height:100%;display:block}
+.flap{position:absolute;left:0;right:0;top:0;height:62%;transform-origin:top;z-index:4;
+  transition:transform .6s ease, z-index 0s .3s}
+.flap svg{width:100%;height:100%;display:block;filter:drop-shadow(0 2px 2px rgba(160,60,80,.18))}
+.seal{position:absolute;left:50%;top:62%;width:34px;height:34px;transform:translate(-50%,-50%);z-index:5;transition:opacity .3s}
+.envelope.open .flap{transform:rotateX(180deg);z-index:1}
+.envelope.open .seal{opacity:0}
+.envelope.open .card{transform:translateY(-58%)}
+.hint{font-size:15px;color:var(--accent);opacity:.85;animation:blink 1.6s ease-in-out infinite;text-align:center}
+@keyframes blink{50%{opacity:.35}}
+
+/* ---------- Letter ---------- */
+#letterStage{align-items:start;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:max(64px,env(safe-area-inset-top)) 16px 32px}
+.letter-col{width:min(100%,420px);margin:0 auto;display:flex;flex-direction:column;align-items:center}
+.paper{position:relative;width:100%;background:var(--paper);border:6px solid var(--frame);border-radius:6px;
+  padding:22px 20px 20px;box-shadow:0 10px 30px rgba(160,60,80,.18);
+  background-image:repeating-linear-gradient(transparent 0 29px,rgba(217,86,111,.08) 29px 30px)}
+.paper .bfly{position:absolute;width:44px;animation:flutter 2.4s ease-in-out infinite}
+.bfly.a{top:-26px;right:-12px}
+.bfly.b{left:-24px;top:38%;animation-delay:.8s;transform:scaleX(-1)}
+@keyframes flutter{50%{transform:translateY(-5px) rotate(6deg)}}
+.bfly.b{animation-name:flutter2}
+@keyframes flutter2{0%,100%{transform:scaleX(-1)}50%{transform:scaleX(-1) translateY(-5px) rotate(6deg)}}
+.paper h2{font-family:"Dancing Script",cursive;color:var(--accent);text-align:center;font-size:24px;margin-bottom:12px}
+.paper p{font-size:16.5px;line-height:30px;margin-bottom:0}
+.paper p + p{margin-top:8px}
+.paper .greet{font-weight:700}
+.paper .sign{text-align:right;margin-top:14px;font-family:"Dancing Script",cursive;font-size:21px;color:var(--accent);line-height:1.3}
+.reveal{opacity:0;transform:translateY(8px);transition:opacity .7s,transform .7s}
+.reveal.on{opacity:1;transform:none}
+
+.bottom{position:relative;width:100%;display:flex;justify-content:space-between;align-items:flex-start;margin-top:-6px}
+.bouquet{width:46%;margin-left:-2%}
+.polaroid{width:44%;background:#fff;padding:8px 8px 26px;box-shadow:0 8px 20px rgba(120,40,60,.22);
+  transform:rotate(5deg);margin-top:18px;position:relative}
+.polaroid svg{width:100%;display:block;border-radius:2px}
+.polaroid span{position:absolute;bottom:4px;left:0;right:0;text-align:center;font-family:"Dancing Script",cursive;color:var(--accent);font-size:16px}
+.replay{margin-top:22px;border:none;background:var(--accent);color:#fff;font-family:inherit;font-size:15px;
+  padding:10px 20px;border-radius:999px;cursor:pointer;box-shadow:0 4px 12px rgba(217,86,111,.35)}
+</style>
+</head>
+<body>
+
+<div id="petals"></div>
+
+<button id="sound" aria-label="Bật/tắt nhạc">
+  <svg id="icoOff" viewBox="0 0 24 24" fill="currentColor"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9l5 5M21 9l-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+  <svg id="icoOn" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+</button>
+
+<!-- Bước 1–2: phong bì -->
+<section class="stage" id="envStage">
+  <div class="envelope-wrap" id="envWrap">
+    <div class="envelope" id="envelope">
+      <div class="env-back"></div>
+      <div class="card">
+        <svg class="flower l" viewBox="0 0 80 120"><use href="#carnation"/></svg>
+        <svg class="flower r" viewBox="0 0 80 120"><use href="#carnation"/></svg>
+        <h1>Happy<br>Women's Day<small>20/10 · Cô &amp; Mẹ</small></h1>
+      </div>
+      <div class="env-front">
+        <svg viewBox="0 0 300 200" preserveAspectRatio="none">
+          <path d="M0 0 L150 112 L300 0 V200 H0Z" fill="var(--env)"/>
+          <path d="M0 200 L150 96 L300 200Z" fill="var(--env-light)"/>
+        </svg>
+      </div>
+      <div class="flap">
+        <svg viewBox="0 0 300 124" preserveAspectRatio="none"><path d="M0 0 H300 L150 124Z" fill="var(--env-light)"/></svg>
+      </div>
+      <svg class="seal" viewBox="0 0 24 24"><path fill="#d9566f" d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 5.3 3.1 1.7-1.9 3.2-3.1 5.3-3.1 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg>
+    </div>
+    <div class="hint" id="hint">Chạm vào phong bì để mở thư 💌</div>
+  </div>
+</section>
+
+<!-- Bước 3: lá thư -->
+<section class="stage hidden" id="letterStage">
+  <div class="letter-col">
+    <div class="paper">
+      <svg class="bfly a" viewBox="0 0 48 40"><use href="#butterfly"/></svg>
+      <svg class="bfly b" viewBox="0 0 48 40"><use href="#butterfly"/></svg>
+      <h2 class="reveal">Lá thư chúc mừng ngày 20/10</h2>
+      <p class="reveal greet">Kính gửi cô giáo và mẹ yêu quý!</p>
+      <p class="reveal">Nhân ngày Phụ nữ Việt Nam 20/10, con xin gửi đến cô và mẹ những lời chúc tốt đẹp nhất. Con chúc cô và mẹ luôn mạnh khỏe, vui vẻ, xinh đẹp và lúc nào cũng nở nụ cười thật tươi.</p>
+      <p class="reveal">Con cảm ơn cô đã dạy con những bài học hay, cảm ơn mẹ đã luôn yêu thương và chăm sóc con mỗi ngày. Con sẽ cố gắng học thật giỏi, ngoan ngoãn để cô và mẹ luôn vui lòng.</p>
+      <p class="reveal">Con yêu cô và mẹ nhiều lắm! 💗</p>
+      <p class="reveal sign">Học trò nhỏ của cô<br>và con yêu của mẹ</p>
+    </div>
+    <div class="bottom">
+      <svg class="bouquet" viewBox="0 0 160 190"><use href="#bouquet"/></svg>
+      <div class="polaroid">
+        <svg viewBox="0 0 120 110"><use href="#scene"/></svg>
+        <span>Cô &amp; Mẹ ♡</span>
+      </div>
+    </div>
+    <button class="replay" id="replay">Xem lại từ đầu ↺</button>
+  </div>
+</section>
+
+<!-- Hình minh hoạ vẽ tay bằng SVG -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <g id="carnation">
+      <path d="M40 60 C38 85 42 100 40 118" stroke="#6bb36b" stroke-width="3" fill="none"/>
+      <path d="M40 92 C28 86 20 90 14 98 C24 100 32 98 40 92Z" fill="#7cc47a"/>
+      <path d="M41 80 C52 72 62 74 68 80 C58 84 50 84 41 80Z" fill="#7cc47a"/>
+      <path d="M20 40 C14 26 26 14 34 20 C36 8 50 8 52 20 C60 14 72 26 64 40 C70 50 58 64 40 62 C22 64 12 50 20 40Z" fill="#f4a3b4"/>
+      <path d="M26 40 C24 30 34 24 40 30 C46 24 58 30 54 40 C58 50 48 56 40 54 C32 56 22 50 26 40Z" fill="#ef8aa0"/>
+      <path d="M32 40 C32 34 38 33 40 37 C42 33 49 34 48 40 C49 46 43 48 40 46 C37 48 31 46 32 40Z" fill="#e2687f"/>
+    </g>
+    <g id="butterfly">
+      <path d="M24 20 C14 2 2 6 4 16 C5 24 16 24 24 20Z" fill="#f6c3cd"/>
+      <path d="M24 20 C34 2 46 6 44 16 C43 24 32 24 24 20Z" fill="#f2b0bd"/>
+      <path d="M24 21 C16 26 10 34 16 36 C21 37 23 30 24 21Z" fill="#f6c3cd"/>
+      <path d="M24 21 C32 26 38 34 32 36 C27 37 25 30 24 21Z" fill="#f2b0bd"/>
+      <path d="M24 12 V32" stroke="#c8925a" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <g id="bouquet">
+      <g stroke="#6bb36b" stroke-width="3" fill="none">
+        <path d="M80 160 C70 120 50 90 42 60"/><path d="M80 160 C80 120 82 80 84 44"/><path d="M80 160 C92 120 112 92 122 66"/>
+      </g>
+      <path d="M60 110 C40 104 30 112 26 122 C42 124 54 120 60 110Z" fill="#7cc47a"/>
+      <path d="M98 108 C118 98 130 104 136 114 C120 120 108 118 98 108Z" fill="#7cc47a"/>
+      <path d="M78 120 C66 96 70 80 78 72 C86 86 86 104 78 120Z" fill="#8fd08a"/>
+      <use href="#carnation" transform="translate(6 2) scale(.9)"/>
+      <use href="#carnation" transform="translate(46 -12) scale(1)"/>
+      <use href="#carnation" transform="translate(86 8) scale(.85)"/>
+      <path d="M58 150 L102 150 L92 172 L68 172Z" fill="#f8cfd7"/>
+      <path d="M80 152 C66 140 56 146 62 154 C66 158 74 156 80 152Z M80 152 C94 140 104 146 98 154 C94 158 86 156 80 152Z" fill="#e2687f"/>
+      <path d="M80 153 L70 182 M80 153 L92 184" stroke="#e2687f" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="80" cy="152" r="4" fill="#d9566f"/>
+    </g>
+    <g id="scene">
+      <rect width="120" height="110" fill="#fde7ea"/>
+      <circle cx="98" cy="18" r="10" fill="#ffd9a8"/>
+      <path d="M0 86 C30 78 90 78 120 86 V110 H0Z" fill="#cfeac6"/>
+      <!-- sách mở (cô giáo) -->
+      <path d="M14 76 L36 70 L58 76 L58 92 L36 86 L14 92Z" fill="#fff" stroke="#e79eac" stroke-width="1.5"/>
+      <path d="M36 70 V86" stroke="#e79eac" stroke-width="1.5"/>
+      <path d="M19 78 L32 75 M19 82 L32 79 M40 75 L53 78 M40 79 L53 82" stroke="#f2b0bd" stroke-width="1.2"/>
+      <!-- trái tim lớn (mẹ) -->
+      <path d="M84 92 s-20-12-20-26c0-7 5-12 11-12 4 0 7 2 9 6 2-4 5-6 9-6 6 0 11 5 11 12 0 14-20 26-20 26z" fill="#ef8aa0"/>
+      <path d="M78 64 c-3 1-5 4-5 7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" fill="none" opacity=".7"/>
+      <!-- bông hoa nhỏ -->
+      <path d="M36 66 V50" stroke="#6bb36b" stroke-width="2"/>
+      <circle cx="36" cy="44" r="6" fill="#f4a3b4"/><circle cx="36" cy="44" r="2.6" fill="#ffd9a8"/>
+      <path d="M36 58 c-6-2-9 0-10 3 4 1 7 0 10-3z" fill="#7cc47a"/>
+      <g fill="#e2687f" opacity=".8">
+        <path d="M60 30 s-5-3-5-6.5c0-1.8 1.3-3 2.8-3 1 0 1.8.6 2.2 1.4.4-.8 1.2-1.4 2.2-1.4 1.5 0 2.8 1.2 2.8 3 0 3.5-5 6.5-5 6.5z"/>
+        <path d="M20 26 s-3.5-2-3.5-4.5c0-1.2.9-2 2-2 .7 0 1.2.4 1.5 1 .3-.6.8-1 1.5-1 1.1 0 2 .8 2 2 0 2.5-3.5 4.5-3.5 4.5z"/>
+      </g>
+    </g>
+  </defs>
+</svg>
+
+<script>
+(function(){
+  const envelope=document.getElementById('envelope');
+  const envWrap=document.getElementById('envWrap');
+  const hint=document.getElementById('hint');
+  const envStage=document.getElementById('envStage');
+  const letterStage=document.getElementById('letterStage');
+  let step=0;
+
+  envWrap.addEventListener('click',()=>{
+    startMusic();
+    if(step===0){
+      envelope.classList.add('open');
+      hint.textContent='Chạm thêm lần nữa để đọc thư nhé 💗';
+      step=1; burst(18);
+    }else if(step===1){
+      step=2;
+      envStage.classList.add('hidden');
+      letterStage.classList.remove('hidden');
+      letterStage.scrollTop=0;
+      document.querySelectorAll('.reveal').forEach((el,i)=>{
+        setTimeout(()=>el.classList.add('on'),400+i*650);
+      });
+      burst(24);
+    }
+  });
+
+  document.getElementById('replay').addEventListener('click',()=>{
+    step=0;
+    document.querySelectorAll('.reveal').forEach(el=>el.classList.remove('on'));
+    letterStage.classList.add('hidden');
+    envStage.classList.remove('hidden');
+    envelope.classList.remove('open');
+    hint.textContent='Chạm vào phong bì để mở thư 💌';
+  });
+
+  /* Cánh hoa & tim rơi */
+  const petals=document.getElementById('petals');
+  const glyphs=['🌸','💗','🌷','💮','💕'];
+  function petal(){
+    const s=document.createElement('span');
+    s.className='petal';
+    s.textContent=glyphs[Math.random()*glyphs.length|0];
+    s.style.left=Math.random()*100+'vw';
+    s.style.fontSize=(12+Math.random()*12)+'px';
+    s.style.setProperty('--dx',(Math.random()*80-40)+'px');
+    s.style.setProperty('--rot',(Math.random()*360)+'deg');
+    s.style.animationDuration=(6+Math.random()*5)+'s';
+    petals.appendChild(s);
+    setTimeout(()=>s.remove(),12000);
+  }
+  function burst(n){for(let i=0;i<n;i++)setTimeout(petal,i*90)}
+  setInterval(petal,900);
+
+  /* Nhạc hộp (music box) tự tổng hợp bằng Web Audio – không cần file nhạc */
+  let ctx=null,playing=false,timer=null,master=null;
+  const btn=document.getElementById('sound');
+  const on=document.getElementById('icoOn'),off=document.getElementById('icoOff');
+  const N={C5:523.25,D5:587.33,E5:659.25,F5:698.46,G5:783.99,A5:880,B4:493.88,A4:440,G4:392,C6:1046.5,E4:329.63,F4:349.23,C4:261.63};
+  const melody=[ // giai điệu gốc, nhẹ nhàng
+    ['E5',1],['G5',1],['C6',2],['B4',1],['C5',1],['E5',2],
+    ['A4',1],['C5',1],['F5',2],['E5',1],['D5',1],['C5',2],
+    ['F4',1],['A4',1],['D5',2],['C5',1],['B4',1],['G4',2],
+    ['E5',1],['D5',1],['C5',1],['E5',1],['C5',4]
+  ];
+  const bass=['C4','C4','A4','A4','F4','F4','G4','C4'];
+  function tone(f,t,d,v){
+    const o=ctx.createOscillator(),g=ctx.createGain(),o2=ctx.createOscillator(),g2=ctx.createGain();
+    o.type='sine';o.frequency.value=f;o2.type='sine';o2.frequency.value=f*2.01;
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.01);g.gain.exponentialRampToValueAtTime(.0005,t+d);
+    g2.gain.setValueAtTime(v*.25,t);g2.gain.exponentialRampToValueAtTime(.0005,t+d*.5);
+    o.connect(g).connect(master);o2.connect(g2).connect(master);
+    o.start(t);o2.start(t);o.stop(t+d+.05);o2.stop(t+d+.05);
+  }
+  function loop(){
+    const beat=.36;let t=ctx.currentTime+.05,total=0;
+    melody.forEach(([n,len])=>{tone(N[n],t+total*beat,1.6,.16);total+=len});
+    bass.forEach((n,i)=>tone(N[n]/2,t+i*4*beat,2.4,.08));
+    timer=setTimeout(loop,total*beat*1000);
+  }
+  function startMusic(){
+    if(playing)return;
+    try{
+      ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();
+      if(!master){master=ctx.createGain();master.gain.value=.9;master.connect(ctx.destination)}
+      ctx.resume();playing=true;loop();
+      on.style.display='';off.style.display='none';
+    }catch(e){}
+  }
+  function stopMusic(){
+    playing=false;clearTimeout(timer);
+    if(ctx)ctx.suspend();
+    on.style.display='none';off.style.display='';
+  }
+  btn.addEventListener('click',e=>{e.stopPropagation();playing?stopMusic():startMusic()});
+})();
+</script>
+</body>
+</html>
